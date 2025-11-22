@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: mega-agency-bridge
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: N8N_WEBHOOK_URL
+        fromService:
+          name: mega-agency-bot
+          type: web
+          property: url
+      - key: BRIDGE_WEBHOOK_SECRET
+        generateValue: true
